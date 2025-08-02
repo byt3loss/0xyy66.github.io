@@ -8,7 +8,7 @@ tags: [cybersecurity, docker, ssh, pentest, ctf]
 
 ![](/assets/images/zombierelay_banner_wb1.jpg)
 
-📂 Repository: [Zombie Relay - Github](https://github.com/0xyy66/ZombieRelay)
+📂 Repository: [Zombie Relay - Github](https://github.com/byt3loss/ZombieRelay)
 
 It is not uncommon to find web services running only on the loopback interface while enumerating a system after gaining a foothold on it during a penetration test (or a CTF). How do you visit them if you don't have access to a browser on the remote host? If you accessed the target via SSH or got an instable reverse shell after exploiting some external service?
 
@@ -111,4 +111,4 @@ docker stop $(docker ps -l -q) && docker rm $(docker ps -l -q)
 
 The relay is easy to set up, portable, and (hopefully) stealthier than dropping a binary on the target. A health check is in the works to help with connectivity issues. Suggestions and feedback are more than welcome.
 
-📂 Repository: [Zombie Relay - Github](https://github.com/0xyy66/ZombieRelay)
+📂 Repository: [Zombie Relay - Github](https://github.com/byt3loss/ZombieRelay)
