@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: cheatsheet
 title: Cheatsheet
 date: 2025-11-04
 categories: []
