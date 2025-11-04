@@ -4,7 +4,7 @@
 @import "{{ site.theme }}";
 
 body{
-  font-family: 'Cutive Mono', monospace;
+  //font-family: 'Cutive Mono', monospace;
 }
 
 header h1, h1, h2, h3, h4, h5, h6{
@@ -37,6 +37,10 @@ header h1::before {
 
 #links a {
   color: #76ff03e0;
+}
+
+#page-date{
+  font-family: 'Cutive Mono', monospace;
 }
 
 /* Ghost Terminal Theme*/
