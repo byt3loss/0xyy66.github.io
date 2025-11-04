@@ -6,6 +6,8 @@ categories: [Cybersecurity, Machine Learning]
 tags: [security, ai]
 ---
 
+![](assets/images/htcmmlm_banner.jpeg)
+
 This article aims to give an insight on how PyTorch malicious ML models work, how they are created and the possible solutions for a developer or an end user to protect themselves.
 
 ## A brief insight on PyTorch and what could go wrong
