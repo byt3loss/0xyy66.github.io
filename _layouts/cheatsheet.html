@@ -40,7 +40,6 @@
             border-radius: 8px;
             padding: .75rem 1rem;
             margin: .5rem 0;
-            background: #fff;
             box-shadow: 0 1px 0 rgba(0, 0, 0, .04);
         }
 
@@ -103,11 +102,12 @@
     <main class="cheatsheet-container" role="main">
         <h1>{{ page.title | default: "Cheatsheet" }}</h1>
 
-        <div class="search-box" aria-label="Cerca nella cheatsheet">
+        <div class="search-box" aria-label="Search the cheatsheet">
             <input id="cheat-search" class="search-input" type="search"
-                placeholder="Cerca per parola chiave (es. sql, buffer, socket)..." aria-label="Cerca">
+                placeholder="Search by keyword (e.g. sql, buffer, socket)..." aria-label="Search">
             <div id="results-count" class="results-count" aria-live="polite"></div>
         </div>
+
 
         <section id="cheat-list">
             {{ content }}
@@ -198,7 +198,7 @@
                         item.classList.add('hidden');
                     }
                 });
-                resultCountEl.textContent = q ? visible + ' risultato' + (visible !== 1 ? 'i' : '') : '';
+                resultCountEl.textContent = q ? visible + ' results' : '';
             }
 
             const handler = debounce((e) => {
@@ -216,7 +216,7 @@
                     input.focus();
                 } else {
                     const items = getItems();
-                    resultCountEl.textContent = items.length + ' voci';
+                    resultCountEl.textContent = items.length + ' items';
                 }
             }
 

@@ -9,6 +9,8 @@ tags: []
 
 <article class="cheat-item" data-keywords="linux http lotl">
 
+### HTTP via /dev/tcp
+
 Craft an HTTP request with `/dev/tcp` when `curl` and `wget` are missing.
 
 ```sh
