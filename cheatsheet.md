@@ -7,7 +7,7 @@ tags: []
 ---
 
 
-<article class="cheat-item" data-keywords="linux http lotl">
+<article class="cheat-item" data-keywords="linux http lotl" markdown="1">
 
 ### HTTP via /dev/tcp
 
