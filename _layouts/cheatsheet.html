@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ page.title | default: site.title }}</title>
+
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+
+
+    <style>
+        .cheatsheet-container {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: .5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: .5rem .75rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .results-count {
+            color: #666;
+            font-size: .9rem;
+        }
+
+        .cheat-item {
+            border-radius: 8px;
+            padding: .75rem 1rem;
+            margin: .5rem 0;
+            background: #fff;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, .04);
+        }
+
+        .cheat-item.hidden {
+            display: none !important;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-break: break-word;
+            margin: .5rem 0 0 0;
+        }
+
+        mark {
+            background: #ffeb3b;
+            padding: 0 .12rem;
+            border-radius: 2px;
+        }
+
+        .tag {
+            font-size: .8rem;
+            color: #444;
+            background: #f1f1f1;
+            padding: .15rem .4rem;
+            border-radius: 4px;
+            margin-right: .3rem;
+        }
+
+        .meta {
+            margin-bottom: .4rem;
+            color: #555;
+            font-size: .9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a id="a-title" href="{{ '/' | relative_url }}">
+                <h1>{{ site.title | default: site.github.repository_name }}</h1>
+            </a>
+            <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+
+            <section id="downloads">
+                {% if site.show_downloads %}
+                <a href="{{ site.github.zip_url }}" class="btn">Download as .zip</a>
+                <a href="{{ site.github.tar_url }}" class="btn">Download as .tar.gz</a>
+                {% endif %}
+            </section>
+            <img src="/assets/images/pwnyoursite_logo.png" alt="" width="100px">
+        </div>
+        <div class="container" id="links">
+            <p>
+                <a href="/">Home</a> ~ <a href="https://github.com/byt3loss">GitHub</a>
+            </p>
+        </div>
+    </header>
+
+    <main class="cheatsheet-container" role="main">
+        <h1>{{ page.title | default: "Cheatsheet" }}</h1>
+
+        <div class="search-box" aria-label="Cerca nella cheatsheet">
+            <input id="cheat-search" class="search-input" type="search"
+                placeholder="Cerca per parola chiave (es. sql, buffer, socket)..." aria-label="Cerca">
+            <div id="results-count" class="results-count" aria-live="polite"></div>
+        </div>
+
+        <section id="cheat-list">
+            {{ content }}
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            // utilities
+            function escapeRegExp(s) { return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'); }
+            function debounce(fn, wait) { let t; return function (...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), wait); }; }
+
+            const input = document.getElementById('cheat-search');
+            const listEl = document.getElementById('cheat-list');
+            const resultCountEl = document.getElementById('results-count');
+
+            // Find all elements using a 'cheat-item' id in the cheatsheet
+            function getItems() {
+                return Array.from(listEl.querySelectorAll('.cheat-item'));
+            }
+
+            // Clear previous highlighted keywords
+            function removeHighlights(el) {
+                const marks = el.querySelectorAll('mark');
+                marks.forEach(m => {
+                    const parent = m.parentNode;
+                    parent.replaceChild(document.createTextNode(m.textContent), m);
+                    parent.normalize();
+                });
+            }
+
+            // highlight keyword
+            function highlight(el, query) {
+                if (!query) return;
+                removeHighlights(el);
+                const re = new RegExp('(' + escapeRegExp(query) + ')', 'ig');
+
+                const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+                    acceptNode: function (node) {
+                        if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+                        if (node.parentNode && node.parentNode.closest && node.parentNode.closest('mark')) return NodeFilter.FILTER_REJECT;
+                        return NodeFilter.FILTER_ACCEPT;
+                    }
+                });
+                const toReplace = [];
+                while (walker.nextNode()) {
+                    const node = walker.currentNode;
+                    if (re.test(node.nodeValue)) {
+                        toReplace.push(node);
+                    }
+                }
+                toReplace.forEach(node => {
+                    const frag = document.createDocumentFragment();
+                    let lastIndex = 0;
+                    node.nodeValue.replace(re, function (_, match, offset) {
+                        if (offset > lastIndex) {
+                            frag.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex, offset)));
+                        }
+                        const m = document.createElement('mark');
+                        m.textContent = match;
+                        frag.appendChild(m);
+                        lastIndex = offset + match.length;
+                    });
+                    if (lastIndex < node.nodeValue.length) {
+                        frag.appendChild(document.createTextNode(node.nodeValue.slice(lastIndex)));
+                    }
+                    node.parentNode.replaceChild(frag, node);
+                });
+            }
+
+            function normalizeText(s) { return (s || '').toString().toLowerCase().replace(/\s+/g, ' ').trim(); }
+
+            function filterAndHighlight(query) {
+                const q = normalizeText(query);
+                const items = getItems();
+                let visible = 0;
+
+                items.forEach(item => {
+                    removeHighlights(item);
+                    const keywords = item.getAttribute('data-keywords') || '';
+                    const hay = normalizeText(item.textContent + ' ' + keywords);
+
+                    if (!q || hay.indexOf(q) !== -1) {
+                        item.classList.remove('hidden');
+                        visible++;
+                        if (q) highlight(item, q);
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+                resultCountEl.textContent = q ? visible + ' risultato' + (visible !== 1 ? 'i' : '') : '';
+            }
+
+            const handler = debounce((e) => {
+                filterAndHighlight(e.target.value);
+            }, 180);
+
+            input.addEventListener('input', handler);
+
+            function applyQueryFromURL() {
+                const params = new URLSearchParams(window.location.search);
+                const q = params.get('q');
+                if (q) {
+                    input.value = q;
+                    filterAndHighlight(q);
+                    input.focus();
+                } else {
+                    const items = getItems();
+                    resultCountEl.textContent = items.length + ' voci';
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', applyQueryFromURL);
+        })();
+    </script>
+    <script data-goatcounter="https://amitracking.pwnyour.site/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>
