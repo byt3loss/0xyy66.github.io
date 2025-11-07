@@ -6,8 +6,6 @@ categories: []
 tags: []
 ---
 
-![](assets/images/cheatsheet_banner.jpg)
-
 <article class="cheat-item" data-keywords="linux http lotl docker-escape" markdown="1">
 
 ### HTTP via /dev/tcp - LOTL
