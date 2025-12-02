@@ -128,39 +128,6 @@ python3 -c "import string; print(', '.join([f\"'{x}'\" for x in string.printable
 </article>
 
 
-<article class="cheat-item" data-keywords="virtualbox vm" markdown="1">
-
-### VirtualBox force VM screen resolution
-
-Sometimes Vbox Guest additions fail to resize the VM resolution. You can force it.
-
-```sh
-VBoxManage setextradata "<VM Name>" VBoxInternal2/EfiGraphicsResolution 1920x1080
-# check graphic resolution info
-VBoxManage getextradata "<VM Name>" enumerate
-```
-
-</article>
-
-
-<article class="cheat-item" data-keywords="docker" markdown="1">
-
-### Cleanup old Docker containers 
-
-Cleanup Docker containers, volumes, networks, images.
-
-```sh
-#!/bin/bash
-sudo docker stop $(sudo docker ps -aq)
-sudo docker rm $(sudo docker ps -aq)
-sudo docker rmi $(sudo docker images -q)
-sudo docker volume rm $(sudo docker volume ls -q)
-sudo docker network rm $(sudo docker network ls -q)
-```
-
-</article>
-
-
 <article class="cheat-item" data-keywords="git dump git-dumper trufflehog" markdown="1">
 
 ### Dump exposed git directory and scan it
@@ -183,4 +150,25 @@ git-dumper https://vulnapp.com/.git /tmp/dump-output
 
 </article>
 
+
+<article class="cheat-item" data-keywords="virtualbox vm docker" markdown="1">
+
+### Random utils
+
+```sh
+# Sometimes Vbox Guest additions fail to resize the VM resolution. You can force it.
+VBoxManage setextradata "<VM Name>" VBoxInternal2/EfiGraphicsResolution 1920x1080
+# check graphic resolution info
+VBoxManage getextradata "<VM Name>" enumerate
+
+# Cleanup Docker containers, volumes, networks, images.
+#!/bin/bash
+sudo docker stop $(sudo docker ps -aq)
+sudo docker rm $(sudo docker ps -aq)
+sudo docker rmi $(sudo docker images -q)
+sudo docker volume rm $(sudo docker volume ls -q)
+sudo docker network rm $(sudo docker network ls -q)
+```
+
+</article>
 
