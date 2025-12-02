@@ -165,7 +165,7 @@ sudo docker network rm $(sudo docker network ls -q)
 
 ### Dump exposed git directory and scan it
 
-Use [git-dumper] to dump exposed git folders on the web.
+Use [git-dumper](https://github.com/arthaud/git-dumper) to dump exposed git folders on the web.
 
 Scan the .git dir with [trufflehog](https://github.com/trufflesecurity/trufflehog) to find commited secrets.
 
