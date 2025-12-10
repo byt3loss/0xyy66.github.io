@@ -106,6 +106,12 @@ netstat -tulpn 2>/dev/null | grep -q $PORT || python3 -m http.server $PORT -d sr
 # "Schedule" a background job that sends the exploit to the target after starting a foreground listener 
 (sleep 5; curl -s -o /dev/null $EXPLOIT_REQUEST) &
 nc -lnvp 4444
+
+# Generate 4 digits codes wordlist for fuzzing.
+seq -w 1 9999 > mfa_pins.txt
+
+# Generate a 3 lowercase chars wordlist (from 'aaa' to 'zzz')
+crunch 3 3 $(python3 -c "import string; print(string.ascii_lowercase)") > lowerchars3.txt
 ```
 
 </article>
@@ -123,6 +129,9 @@ python3 -c "import string; [print(x) for x in string.printable.strip()]" > chars
 
 # generate a list of printable characters to be used in other scripts
 python3 -c "import string; print(', '.join([f\"'{x}'\" for x in string.printable.strip()]))"
+
+# generate base64 encoded tokens with format "jeremy-15:10:09-..." where every dot is a lowercase char from a previously generated wordlist (lowerchars3.txt)
+python3 -c "import base64; [print(base64.b64encode(f'jeremy-15:10:09-{x.strip()}'.encode()).decode()) for x in open('lowerchars3.txt', 'r').readlines()]"
 ```
 
 </article>
