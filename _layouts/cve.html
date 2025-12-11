@@ -94,19 +94,20 @@
         </div>
         <div class="container" id="links">
             <p>
-                <a href="/">Home</a> ~ <a href="https://github.com/byt3loss">GitHub</a> ~ <a href="/cheatsheet">Cheatsheet</a>
+                <a href="/">Home</a> ~ <a href="https://github.com/byt3loss">GitHub</a> ~ <a href="/cheatsheet">Cheatsheet</a> ~ <a href="/cve">CVEs</a>
             </p>
         </div>
     </header>
 
-    <img src="assets/images/cheatsheet_banner.jpg" style="display: block; margin-left: auto; margin-right: auto;">
+    <!-- <img src="assets/images/cheatsheet_banner.jpg" style="display: block; margin-left: auto; margin-right: auto;"> -->
 
     <main class="cheatsheet-container" role="main">
         <h1>{{ page.title | default: "Cheatsheet" }}</h1>
 
+        <p>This blog is a collection of CVE-related resources that I come across while working on bug bounties, penetration tests, or CTFs. Whenever I encounter a new CVE, I study it to understand whether—and how—I can exploit it. You may also want to check out my repository of custom-crafted exploits on GitHub: <a href="https://github.com/byt3loss/OffensiveScripts">Offensive Scripts</a>.</p>
         <div class="search-box" aria-label="Search the cheatsheet">
             <input id="cheat-search" class="search-input" type="search"
-                placeholder="Search by keyword (e.g. ffuf, sqlmap, lotl)..." aria-label="Search">
+                placeholder="Search by keyword (e.g. node, wordpress, flask)..." aria-label="Search">
             <div id="results-count" class="results-count" aria-live="polite"></div>
         </div>
 
