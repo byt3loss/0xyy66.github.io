@@ -9,6 +9,7 @@ SOC Analyst working to change sides and become a Pentester. CTFs player. Intrigu
 
 ## ~/articles
 
+- [2025-12-28] - [HTB Gavel - Writeup](./2025-12-28-htb-gavel-writeup)
 - [2025-12-10] - [Attacking JWTs](./2025-12-10-attacking-jwt)
 - [2025-04-19] - [Zombie Relay - Temporary relay for Reverse SSH Tunneling](./2025-04-19-zombie-relay)
 - [2025-03-22] - [Access SSH via Kerberos](./2025-03-22-access-ssh-via-kerberos)
