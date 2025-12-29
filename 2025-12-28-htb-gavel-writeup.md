@@ -165,6 +165,7 @@ Usage: `python3 gavel_rce.py -s <SESSION_COOKIE> -lh <LHOST> -lp <LPORT> -i <AUC
 The flags `-w` and `-f` are optional:
 - `-w`: web shell name (default: "websh.php")
 - `-f`: FIFO file name (default: "p")
+
 ## Privilege Escalation
 The user auctioneer's password is the same dumped from the database (it doesn't work from SSH). 
 

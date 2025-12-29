@@ -90,6 +90,49 @@ ssh -i ssh_key -p 2224 -R 9090:127.0.0.1:19999 root@10.10.14.59 -N -f
 </article>
 
 
+<article class="cheat-item" data-keywords="recon subdomains" markdown="1">
+
+### Crt.sh - parse output from CLI
+
+1. **curl** results
+2. **awk**: very basic way to parse csv get subdomains
+3. **sed**: remove quotes
+4. **sort**
+5. keep **unique** records
+6. **python**: validate domains
+7. **sed**: remove empty lines
+8. **tee**: save final result in `subdomains.txt` 
+
+```sh
+curl -s https://crt.sh/csv?q=$TARGET | awk -F ',' '{print $5}'| sed 's/"//g'| sed -r '/^\s*$/d' | sort | uniq | python3 -c "import sys; import re; print(''.join([x if re.match(r'^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$', x) else '' for x in sys.stdin]))" | sed -r '/^\s*$/d' |  tee subdomains.txt
+```
+
+</article>
+
+
+<article class="cheat-item" data-keywords="git dump git-dumper trufflehog" markdown="1">
+
+### Dump exposed git directory and scan it
+
+Use [git-dumper](https://github.com/arthaud/git-dumper) to dump exposed git folders on the web.
+
+Scan the .git dir with [trufflehog](https://github.com/trufflesecurity/trufflehog) to find commited secrets.
+
+```sh
+# install
+virtualenv .venv
+pip install git-dumper
+
+# dump
+git-dumper https://vulnapp.com/.git /tmp/dump-output
+
+# scan
+./trufflehog git file:///tmp/dump-output
+```
+
+</article>
+
+
 <article class="cheat-item" data-keywords="bash scripting" markdown="1">
 
 ### Bash Scripting - useful tricks
@@ -132,29 +175,6 @@ python3 -c "import string; print(', '.join([f\"'{x}'\" for x in string.printable
 
 # generate base64 encoded tokens with format "jeremy-15:10:09-..." where every dot is a lowercase char from a previously generated wordlist (lowerchars3.txt)
 python3 -c "import base64; [print(base64.b64encode(f'jeremy-15:10:09-{x.strip()}'.encode()).decode()) for x in open('lowerchars3.txt', 'r').readlines()]"
-```
-
-</article>
-
-
-<article class="cheat-item" data-keywords="git dump git-dumper trufflehog" markdown="1">
-
-### Dump exposed git directory and scan it
-
-Use [git-dumper](https://github.com/arthaud/git-dumper) to dump exposed git folders on the web.
-
-Scan the .git dir with [trufflehog](https://github.com/trufflesecurity/trufflehog) to find commited secrets.
-
-```sh
-# install
-virtualenv .venv
-pip install git-dumper
-
-# dump
-git-dumper https://vulnapp.com/.git /tmp/dump-output
-
-# scan
-./trufflehog git file:///tmp/dump-output
 ```
 
 </article>
