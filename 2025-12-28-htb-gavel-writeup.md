@@ -6,6 +6,8 @@ categories: [CTF, HackTheBox]
 tags: [sqli, web, ctf, rce, privesc]
 ---
 
+![](assets/images/htb_gavel/banner.jpg)
+
 - CTF: [Gavel](https://app.hackthebox.com/machines/Gavel)
 - Difficulty: Medium
 
