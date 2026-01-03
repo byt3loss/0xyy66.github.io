@@ -1,13 +1,13 @@
 ---
 layout: post
 title: HTB Gavel - Writeup
-date: 2025-12-10
+date: 2025-12-28
 categories: [CTF, HackTheBox]
-tags: [sqli, web, ctf, rce]
+tags: [sqli, web, ctf, rce, privesc]
 ---
 
-- Challenge: [Gavel](https://app.hackthebox.com/machines/Gavel)
-- Difficulty: medium
+- CTF: [Gavel](https://app.hackthebox.com/machines/Gavel)
+- Difficulty: Medium
 
 ## Port scan
 ```
