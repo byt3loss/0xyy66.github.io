@@ -5,3 +5,4 @@ plugins:
   - jekyll-seo-tag
 
 custom_css: _sites/assets/css/style.css
+favicon: _sites/assets/images/pwnyoursite_logo.png
