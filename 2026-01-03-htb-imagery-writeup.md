@@ -236,7 +236,7 @@ nc 10.10.11.88 5099 > web_20250806_120723.zip.aes
 
 The archive has been encrypted with `pyAesCrypt` (the file `~/.local/bin/pyAesCrypt` is a big hint - found by running `env` and checking the PATH variable).
 
-I wrote a script to brute-force the archive.
+I wrote a [script](https://github.com/byt3loss/OffensiveScripts/tree/main/Others/pyAesCrypt_bruteforcer) to brute-force the archive.
 ![](assets/images/htb_imagery/htb_imagery_bruteforce.png)
 
 Finally unzip the decrypted archive: `unzip web_20250806_120723.zip`.
