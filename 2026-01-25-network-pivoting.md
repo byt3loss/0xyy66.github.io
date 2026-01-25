@@ -38,7 +38,7 @@ Drop the agent on the target, then connect back.
 ```
 
 You should see the agent connect back.
-![](img/dante/ligolo-proxy.png)
+![](assets/images/net_pivot_ligolo.png)
 
 Open another terminal and add the new tunnel.
 ```sh
