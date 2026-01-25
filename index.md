@@ -9,6 +9,7 @@ SOC Analyst working to change sides and become a Pentester. CTFs player. Intrigu
 
 ## ~/articles
 
+- [2025-01-25] - [Network Pivoting Techniques](./2026-01-25-network-pivoting.md)
 - [2026-01-03] - [HTB Imagery - Writeup](./2026-01-03-htb-imagery-writeup)
 - [2025-12-28] - [HTB Gavel - Writeup](./2025-12-28-htb-gavel-writeup)
 - [2025-12-10] - [Attacking JWTs](./2025-12-10-attacking-jwt)
